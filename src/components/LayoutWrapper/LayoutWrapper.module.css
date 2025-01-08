@@ -1,0 +1,14 @@
+.layout {
+    min-height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--ant-color-text-light-solid);
+}
