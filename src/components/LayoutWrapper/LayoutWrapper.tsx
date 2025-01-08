@@ -1,9 +1,10 @@
-import {FC} from "react";
-import {Flex, Layout, Menu, MenuProps} from "antd";
+import {FC, useState} from "react";
+import {Button, Flex, Layout, Menu, MenuProps} from "antd";
 import {Link, Outlet} from "react-router-dom";
 import styles from './LayoutWrapper.module.css';
 import {API_DOCS_URL} from "../../constants/constants.ts";
-import {ExportOutlined} from "@ant-design/icons";
+import {ExportOutlined, LoginOutlined} from "@ant-design/icons";
+import {AuthModal, AuthModalMode} from "../AuthModal/AuthModal.tsx";
 
 const ITEMS: MenuProps['items'] = [
     {
@@ -32,6 +33,9 @@ const ITEMS: MenuProps['items'] = [
 ]
 
 export const LayoutWrapper: FC = () => {
+    const [authModalOpen, setAuthModalOpen] = useState(false);
+    const [authModalMode, setAuthModalMode] = useState<AuthModalMode>('login');
+
     return (
         <Layout className={styles.layout}>
             <Layout.Header className={styles.header}>
@@ -41,15 +45,34 @@ export const LayoutWrapper: FC = () => {
                         AirQua
                     </Link>
                 </Flex>
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    disabledOverflow
-                    items={ITEMS}
-                />
+                <Flex align="center" gap={16}>
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        disabledOverflow
+                        items={ITEMS}
+                    />
+                    <Button
+                        type="primary"
+                        size="large"
+                        icon={<LoginOutlined />}
+                        onClick={() => setAuthModalOpen(true)}
+                    >
+                        Login
+                    </Button>
+                </Flex>
             </Layout.Header>
             <Layout.Content className={styles.content}>
                 <Outlet />
+                <AuthModal
+                    open={authModalOpen}
+                    onCancel={() => {
+                        setAuthModalOpen(false);
+                        setAuthModalMode('login');
+                    }}
+                    mode={authModalMode}
+                    onModeChange={setAuthModalMode}
+                />
             </Layout.Content>
         </Layout>
     )

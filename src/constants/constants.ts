@@ -1,3 +1,8 @@
+export const BASE_URL = '/';
+export const API_BASE_URL = `${BASE_URL}/api`;
+
+export const AUTH_REDIRECT_URL = '/login';
+
 export const API_DOCS_URL = "https://api.airqua.uk";
 
 export const MAP_INITIAL_VIEWSTATE = {
