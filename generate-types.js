@@ -1,10 +1,9 @@
 import {generateApi} from "swagger-typescript-api";
 import path from "node:path";
 
-const PATH = path.resolve(process.cwd(), "./src/types/domain");
+const PATH = path.resolve(process.cwd(), "./src/types");
 const SWAGGERS = Object.entries({
-    "https://api.airqua.uk/openapi/v1.yml": "public.ts",
-    "https://airqua.uk/api/swagger/openapi.yml": "private.ts",
+    "https://airqua.uk/api/swagger/openapi.yml": "domain.ts",
 });
 
 (async () => {
