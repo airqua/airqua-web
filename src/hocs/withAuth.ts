@@ -5,7 +5,7 @@ import {authGet} from "../api/auth/authGet.ts";
 import {redirect} from "react-router-dom";
 import {AUTH_REDIRECT_URL} from "../constants/constants.ts";
 
-export const checkAuth = async () => {
+export const checkAuth = async (required?: boolean) => {
     const profile = useOwnProfile.getState().profile;
     if(profile) return null;
 
@@ -15,14 +15,14 @@ export const checkAuth = async () => {
             useOwnProfile.setState({ profile: payload });
             return null;
         }
-        return redirect(AUTH_REDIRECT_URL);
+        return required ? redirect(AUTH_REDIRECT_URL) : null;
     } catch {
-        return redirect(AUTH_REDIRECT_URL);
+        return required ? redirect(AUTH_REDIRECT_URL) : null;
     }
 };
 
-export const withAuth = (Component: FC): PageType => {
+export const withAuth = (Component: FC, required?: boolean): PageType => {
     const PageComponent = (Component as PageType);
-    PageComponent.loader = checkAuth;
+    PageComponent.loader = () => checkAuth(required);
     return PageComponent;
 }

@@ -3,8 +3,11 @@ import {Button, Flex, Layout, Menu, MenuProps} from "antd";
 import {Link, Outlet} from "react-router-dom";
 import styles from './LayoutWrapper.module.css';
 import {API_DOCS_URL} from "../../constants/constants.ts";
-import {ExportOutlined, LoginOutlined} from "@ant-design/icons";
+import {ExportOutlined, LoginOutlined, LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {AuthModal, AuthModalMode} from "../AuthModal/AuthModal.tsx";
+import {useOwnProfile} from "../../stores/OwnProfileStore.ts";
+import {authDelete} from "../../api/auth/authDelete.ts";
+import {checkAuth} from "../../hocs/withAuth.ts";
 
 const ITEMS: MenuProps['items'] = [
     {
@@ -35,6 +38,11 @@ const ITEMS: MenuProps['items'] = [
 export const LayoutWrapper: FC = () => {
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [authModalMode, setAuthModalMode] = useState<AuthModalMode>('login');
+    const { profile } = useOwnProfile();
+
+    const handleDelete = () => {
+        return authDelete().then(() => checkAuth());
+    }
 
     return (
         <Layout className={styles.layout}>
@@ -52,14 +60,33 @@ export const LayoutWrapper: FC = () => {
                         disabledOverflow
                         items={ITEMS}
                     />
-                    <Button
-                        type="primary"
-                        size="large"
-                        icon={<LoginOutlined />}
-                        onClick={() => setAuthModalOpen(true)}
-                    >
-                        Login
-                    </Button>
+                    {profile ? (
+                        <Flex gap={8}>
+                            <Link to="/account">
+                                <Button
+                                    ghost
+                                    size="large"
+                                    icon={<UserOutlined />}
+                                >My account</Button>
+                            </Link>
+                            <Button
+                                ghost
+                                size="large"
+                                danger
+                                icon={<LogoutOutlined />}
+                                onClick={handleDelete}
+                            />
+                        </Flex>
+                    ) : (
+                        <Button
+                            type="primary"
+                            size="large"
+                            icon={<LoginOutlined />}
+                            onClick={() => setAuthModalOpen(true)}
+                        >
+                            Login
+                        </Button>
+                    )}
                 </Flex>
             </Layout.Header>
             <Layout.Content className={styles.content}>

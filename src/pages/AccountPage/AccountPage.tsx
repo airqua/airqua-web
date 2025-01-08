@@ -1,5 +1,5 @@
-import {PageType} from "../../types/PageType.ts";
+import {withAuth} from "../../hocs/withAuth.ts";
 
-export const AccountPage: PageType = () => {
+export const AccountPage = withAuth(() => {
     return null;
-}
+}, true);

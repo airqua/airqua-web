@@ -1,8 +1,8 @@
-import {PageType} from "../../types/PageType.ts";
 import {SensorsMap} from "./components/SensorsMap/SensorsMap.tsx";
+import {withAuth} from "../../hocs/withAuth.ts";
 
-export const MainPage: PageType = () => {
+export const MainPage = withAuth(() => {
     return (
         <SensorsMap />
     );
-}
+});
