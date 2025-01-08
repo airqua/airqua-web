@@ -12,9 +12,12 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "@tanstack/react-query": "^5.62.16",
+    "@types/mapbox-gl": "^3.4.1",
     "antd": "^5.23.0",
+    "mapbox-gl": "^3.9.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-map-gl": "^7.1.8",
     "react-router-dom": "^7.1.1"
   },
   "devDependencies": {

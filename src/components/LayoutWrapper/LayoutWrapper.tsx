@@ -48,7 +48,7 @@ export const LayoutWrapper: FC = () => {
                     items={ITEMS}
                 />
             </Layout.Header>
-            <Layout.Content>
+            <Layout.Content className={styles.content}>
                 <Outlet />
             </Layout.Content>
         </Layout>
