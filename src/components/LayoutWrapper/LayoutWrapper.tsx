@@ -61,7 +61,7 @@ export const LayoutWrapper: FC = () => {
                         items={ITEMS}
                     />
                     {profile ? (
-                        <Flex gap={8}>
+                        <Flex align="center" gap={8}>
                             <Link to="/account">
                                 <Button
                                     ghost
