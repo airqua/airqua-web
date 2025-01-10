@@ -24,7 +24,7 @@ export const SensorDataContentRow: FC<Props> = ({
     onToggleExpand
 }) => {
     // FIXME that's not good
-    const prevReadingValue = readings?.[1]?.values.find((v) => v.id === value.id);
+    const prevReadingValue = readings?.[1]?.values.find((v) => v.metric.id === value.metric.id);
 
     const [chartSelectedDate, setChartSelectedDate] = useState(dayjs());
     const chartReadings = useMemo(() => readings?.filter(
