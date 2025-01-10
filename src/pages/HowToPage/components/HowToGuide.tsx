@@ -38,8 +38,15 @@ export const HowToGuide: FC = () => (
         <Typography.Title level={3}>Setting up your device</Typography.Title>
         <Typography.Title level={4}>Wio Terminal</Typography.Title>
         <Typography.Paragraph>
-            For Wio Terminal devices, AirQua provides custom firmware and a simple GUI app to install it.
-            TODO add link and stuff
+            For Wio Terminal devices, AirQua provides <Typography.Link
+                href="https://github.com/airqua/airqua-terminal"
+                target="_blank"
+                rel="norefferer noopener"
+            >custom firmware</Typography.Link> and a <Typography.Link
+                href="https://github.com/airqua/airqua-terminal-flasher"
+                target="_blank"
+                rel="norefferer noopener"
+            >simple GUI</Typography.Link> to install it.
         </Typography.Paragraph>
         <Typography.Title level={4}>Custom devices through MQTT</Typography.Title>
         <Typography.Paragraph>
@@ -53,7 +60,15 @@ export const HowToGuide: FC = () => (
             An object with pairs of keys of metric ids and float values is expected in the publication.
             Publication should be sent into the topic named exactly as the id of the device.
         </Typography.Paragraph>
-        <Typography.Title level={4}>Custom services through REST</Typography.Title>
+        <Typography.Paragraph>
+            <Typography.Text strong>Example:</Typography.Text>
+            <pre>
+                    PUBLISH<br />
+                    topicName "0194519f-ebb5-7820-aa24-e3e10954db01"<br/>
+                    payload "&#123;"co2": 450&#125;"
+                </pre>
+        </Typography.Paragraph>
+        <Typography.Title level={4}>Custom devices through REST</Typography.Title>
         <Typography.Paragraph>
             Readings should be sent to <Typography.Text code>
                 POST /sensors/&#123;sensorId&#125;/readings
