@@ -1,7 +1,7 @@
 import {FC, useMemo, useState} from "react";
 import {SensorReading, SensorReadingValue} from "../../types/domain.ts";
 import styles from "./SensorDataContent.module.css";
-import {Button, Empty, Flex, Typography} from "antd";
+import {Button, Empty, Flex, Tooltip, Typography} from "antd";
 import cx from 'classnames';
 import {TrendArrow} from "../TrendArrow/TrendArrow.tsx";
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
@@ -50,7 +50,15 @@ export const SensorDataContentRow: FC<Props> = ({
                     <Flex justify="space-between">
                         <Flex vertical>
                             <Typography.Text>{value.metric.name}</Typography.Text>
-                            <Typography.Text type="secondary">{value.metric.description}</Typography.Text>
+                            <Tooltip title={value.metric.description}>
+                                <Typography.Paragraph
+                                    type="secondary"
+                                    ellipsis={{
+                                        rows: 2,
+                                        expandable: false
+                                    }}
+                                >{value.metric.description}</Typography.Paragraph>
+                            </Tooltip>
                         </Flex>
                         <Flex>
                             <Button
