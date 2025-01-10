@@ -57,6 +57,7 @@ export const SensorDataContentRow: FC<Props> = ({
                                         rows: 2,
                                         expandable: false
                                     }}
+                                    className={styles.valueRowText}
                                 >{value.metric.description}</Typography.Paragraph>
                             </Tooltip>
                         </Flex>
