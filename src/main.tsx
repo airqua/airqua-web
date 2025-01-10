@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {App, ConfigProvider} from "antd";
 import {RouterProvider} from "react-router-dom";
+import 'chart.js/auto';
+import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm';
 import {router} from "./router.tsx";
 
 const queryClient = new QueryClient();

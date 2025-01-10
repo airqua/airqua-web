@@ -1,0 +1,40 @@
+.container {
+    width: 400px;
+    height: 300px;
+}
+
+.titleContainer {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ant-color-border);
+}
+
+.title {
+    margin: 0 !important;
+}
+
+.valueRow {
+    height: 60px;
+    border-bottom: 1px solid var(--ant-color-border);
+    transition: height .5s, padding .5s;
+    overflow-y: hidden;
+    cursor: pointer;
+}
+
+.valueRowExpanded {
+    height: 268px;
+    border-bottom: 0;
+}
+
+.valueRowCompressed {
+    height: 0;
+    border-bottom: 0;
+}
+
+.valueRowPanel {
+    height: 60px;
+    overflow-y: hidden;
+}
+
+.valueRowText {
+    margin: 0 !important;
+}

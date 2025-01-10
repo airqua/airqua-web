@@ -1,0 +1,20 @@
+.sensor {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.normalReadings {
+    border: 3px solid var(--ant-color-success);
+    background-color: var(--ant-color-success-border-hover);
+}
+
+.abnormalReadings {
+    border: 3px solid var(--ant-color-error);
+    background-color: var(--ant-color-error-border-hover);
+}
+
+.inactiveReadings {
+    border: 3px solid var(--ant-color-text-tertiary);
+    background-color: var(--ant-color-text-quaternary);
+}
