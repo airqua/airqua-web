@@ -1,0 +1,21 @@
+.content {
+    padding: 24px 24px 82px;
+}
+
+@media screen and (min-width: 768px) {
+    .content {
+        padding: 24px 48px 82px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .content {
+        padding: 24px 64px 82px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .content {
+        padding: 24px 128px 82px;
+    }
+}

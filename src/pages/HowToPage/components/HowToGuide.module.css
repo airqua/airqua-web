@@ -1,0 +1,5 @@
+.textContainer {
+    & a, & span, & p, & div {
+        font-size: 16px !important;
+    }
+}
