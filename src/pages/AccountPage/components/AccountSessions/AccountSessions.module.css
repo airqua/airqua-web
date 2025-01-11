@@ -1,0 +1,9 @@
+.session {
+    padding: 8px;
+    & a, & span, & p, & div {
+        margin: 0 !important;
+    }
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--ant-color-border);
+    }
+}

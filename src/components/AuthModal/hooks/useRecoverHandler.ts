@@ -1,6 +1,6 @@
 import {App, FormProps} from "antd";
 import {RecoverPost} from "../../../types/domain.ts";
-import {authRecoverPost} from "../../../api/auth/authRecoverPost.ts";
+import {authRecoverPost} from "../../../api/auth/recover/authRecoverPost.ts";
 
 type Params = {
     setLoading: (loading: boolean) => void;

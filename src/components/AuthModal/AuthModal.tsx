@@ -71,7 +71,6 @@ export const AuthModal: FC<Props> = ({ open, onCancel, mode, onModeChange }) => 
             okText={MODAL_OK_TEXT_MAP[mode]}
             okButtonProps={{ loading }}
             onCancel={onCancel}
-            cancelButtonProps={{ loading }}
             centered
             destroyOnClose
         >

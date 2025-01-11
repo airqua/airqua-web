@@ -17,6 +17,24 @@ export default [
         }),
     },
     {
+        url: makeUrl('/auth/sessions'),
+        method: 'get',
+        response: makeGenericOk( [
+            {
+                "id": "ahaSnMOd",
+                "created_at": "2025-01-09T13:10:29.000Z",
+                "valid_until": "2025-01-23T13:10:29.000Z"
+            }
+        ])
+    },
+    {
+        url: makeUrl('/auth/token'),
+        method: 'get',
+        response: makeGenericOk( {
+            token: 'qwertyqwertyqwertyqwertyqwertyqwertyqwerty'
+        })
+    },
+    {
         url: makeUrl('/sensors'),
         method: 'get',
         response: makeGenericOk([

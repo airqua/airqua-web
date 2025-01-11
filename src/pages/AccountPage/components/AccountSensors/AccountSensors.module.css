@@ -1,0 +1,14 @@
+.card {
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardHeader {
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.cardBody {
+    flex: 1 0;
+}
