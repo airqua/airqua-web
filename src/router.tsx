@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouteObject} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouteObject} from "react-router-dom";
 import {PageType} from "./types/PageType.ts";
 import {LayoutWrapper} from "./components/LayoutWrapper/LayoutWrapper.tsx";
 import {MainPage} from "./pages/MainPage/MainPage.tsx";
@@ -9,7 +9,7 @@ import {AboutPage} from "./pages/AboutPage/AboutPage.tsx";
 const path = (path: string, Page: PageType): RouteObject => ({
     path,
     element: <Page />,
-    loader: Page.loader
+    loader: Page.loader,
 })
 
 export const router = createBrowserRouter([
@@ -17,13 +17,22 @@ export const router = createBrowserRouter([
         element: <LayoutWrapper />,
         children: [
             path('/', MainPage),
-            // path('/login', LoginPage),
-            // path('/signup', SignupPage),
-            // path('/recover', RecoverPage),
             // path('/verify', VerifyPage),
             path('/howto', HowToPage),
             path('/about', AboutPage),
             path('/account', AccountPage),
+            {
+                path: '/login',
+                element: <Navigate to="/" state={{ modal: 'login' }} />
+            },
+            {
+                path: '/signup',
+                element: <Navigate to="/" state={{ modal: 'signup' }} />
+            },
+            {
+                path: '/recover',
+                element: <Navigate to="/" state={{ modal: 'recovery' }} />
+            }
         ]
     }
 ]);
