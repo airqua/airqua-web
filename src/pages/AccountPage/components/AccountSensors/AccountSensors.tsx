@@ -138,6 +138,7 @@ export const AccountSensors: FC = () => {
                 columns={columns}
                 dataSource={sensors?.map((sensor) => ({ ...sensor, key: sensor.id }))}
                 loading={isLoading}
+                pagination={{ pageSize: 9 }}
             />
             <MapModal
                 point={mapCoordinates}
