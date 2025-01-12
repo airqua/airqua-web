@@ -3,27 +3,28 @@ import {App, Button, Card, Divider, Flex, Input, Typography} from "antd";
 import styles from './AccountInfo.module.css';
 import {useOwnProfile} from "../../../../stores/OwnProfileStore.ts";
 import {ApiOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
-import {authVerifyPost} from "../../../../api/auth/verify/authVerifyPost.ts";
+import {accountVerifyPost} from "../../../../api/account/verify/accountVerifyPost.ts";
 import {AuthSessions} from "../AccountSessions/AccountSessions.tsx";
 import {useToken} from "../../../../queries/useToken.ts";
-import {ChangePasswordModal} from "../ChangePasswordModal/ChangePasswordModal.tsx";
-import {useNavigate} from "react-router-dom";
-import {authTokenPut} from "../../../../api/auth/token/authTokenPut.ts";
+import {EditProfileModal} from "../EditProfileModal/EditProfileModal.tsx";
+import {accountTokenPut} from "../../../../api/account/token/accountTokenPut.ts";
 import {authSessionsDelete} from "../../../../api/auth/sessions/authSessionsDelete.ts";
+import {accountDelete} from "../../../../api/account/accountDelete.ts";
+import {useNavigate} from "react-router-dom";
 
 export const AccountInfo: FC = () => {
     const { modal, message } = App.useApp();
 
     const { profile, setProfile } = useOwnProfile();
-    const navigate = useNavigate();
     const { data: token } = useToken();
+    const navigate = useNavigate();
 
     const [verifyLoading, setVerifyLoading] = useState(false);
     const handleVerifyClick = async () => {
         if(await modal.confirm({ title: 'Resend verification email?' })) {
             setVerifyLoading(true);
             try {
-                await authVerifyPost();
+                await accountVerifyPost();
                 message.success('Success! Please check your inbox')
             } catch(e) {
                 console.error(e);
@@ -34,18 +35,14 @@ export const AccountInfo: FC = () => {
         }
     }
 
-    const [changePasswordModalOpen, setChangePasswordModalOpened] = useState(false);
-    const handlePasswordChange = () => {
-        setProfile(null);
-        navigate('/login');
-    }
+    const [editAccountModalOpen, setEditAccountModalOpened] = useState(false);
 
     const [tokenRegenLoading, setTokenRegenLoading] = useState(false);
     const handleTokenRegenerate = async () => {
         if(await modal.confirm({ title: 'Generate new token?' })) {
             setTokenRegenLoading(true);
             try {
-                await authTokenPut();
+                await accountTokenPut();
                 message.success('Success! Please update all sensors that might use old token');
             } catch(e) {
                 console.error(e);
@@ -72,6 +69,24 @@ export const AccountInfo: FC = () => {
         }
     }
 
+    const [accountDeleteLoading, setAccountDeleteLoading] = useState(false);
+    const handleAccountDelete = async () => {
+        if(await modal.confirm({ title: 'Delete all sessions except current?' })) {
+            setAccountDeleteLoading(true);
+            try {
+                await accountDelete();
+                message.success('We are sorry that you have to go');
+                setProfile(null);
+                navigate('/');
+            } catch(e) {
+                console.error(e);
+                message.error('Unknown error encountered while deleting account');
+            } finally {
+                setAccountDeleteLoading(false);
+            }
+        }
+    }
+
     return (
         <Card
             title={(
@@ -93,18 +108,16 @@ export const AccountInfo: FC = () => {
                             >Verify</Button>
                         )}
                     </Flex>
+                    <Button
+                        icon={<EditOutlined />}
+                        onClick={() => setEditAccountModalOpened(true)}
+                    >Edit profile</Button>
                 </Flex>
             )}
             className={styles.card}
             classNames={{ header: styles.cardHeader, body: styles.cardBody }}
         >
             <Flex vertical gap={16} flex="1 0">
-                <Typography.Text>To change your email drop a message to hi@airqua.uk</Typography.Text>
-                <Button
-                    icon={<EditOutlined />}
-                    onClick={() => setChangePasswordModalOpened(true)}
-                >Change password</Button>
-                <Divider className={styles.noMargin} />
                 <Flex vertical gap={8}>
                     <Typography.Title level={5} className={styles.noMargin}>Token</Typography.Title>
                     <Input.Password value={token?.token} />
@@ -120,19 +133,26 @@ export const AccountInfo: FC = () => {
                 <Flex vertical flex="1 0">
                     <Typography.Title level={5} className={styles.noMargin}>Sessions</Typography.Title>
                     <AuthSessions />
-                    <Button
-                        type="primary"
-                        danger
-                        icon={<DeleteOutlined />}
-                        loading={sessionsDeleteLoading}
-                        onClick={handleSessionsDelete}
-                    >Delete all sessions</Button>
+                    <Flex vertical gap={6}>
+                        <Button
+                            type="primary"
+                            danger
+                            icon={<DeleteOutlined />}
+                            loading={sessionsDeleteLoading}
+                            onClick={handleSessionsDelete}
+                        >Delete all sessions</Button>
+                        <Button
+                            danger
+                            icon={<DeleteOutlined />}
+                            loading={accountDeleteLoading}
+                            onClick={handleAccountDelete}
+                        >Delete account</Button>
+                    </Flex>
                 </Flex>
             </Flex>
-            <ChangePasswordModal
-                open={changePasswordModalOpen}
-                onClose={() => setChangePasswordModalOpened(false)}
-                onChange={handlePasswordChange}
+            <EditProfileModal
+                open={editAccountModalOpen}
+                onClose={() => setEditAccountModalOpened(false)}
             />
         </Card>
     )

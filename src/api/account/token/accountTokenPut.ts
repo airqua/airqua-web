@@ -1,7 +1,7 @@
 import {requestService} from "../../requestService.ts";
 import {Token} from "../../../types/domain.ts";
 
-export const authTokenGet = () => requestService<Token>({
+export const accountTokenPut = () => requestService<Token>({
     url: '/auth/token',
-    method: 'GET'
+    method: 'PUT',
 })

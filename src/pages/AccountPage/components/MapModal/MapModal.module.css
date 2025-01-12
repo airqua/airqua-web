@@ -1,0 +1,8 @@
+.modalContent {
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.modalBody {
+    height: 600px;
+}

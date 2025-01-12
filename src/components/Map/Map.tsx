@@ -2,14 +2,15 @@ import {FC} from "react";
 import {Map as MapGl, Marker} from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {MAP_INITIAL_VIEWSTATE, MAPBOX_LIGHT_THEME_STYLE} from "../../constants/constants.ts";
-import {Sensor} from "../../types/domain.ts";
+import {Coordinates, Sensor} from "../../types/domain.ts";
 import {MapSensor} from "../MapSensor/MapSensor.tsx";
 
 type Props = {
     sensors?: Sensor[];
+    point?: Coordinates;
 }
 
-export const Map: FC<Props> = ({ sensors }) => {
+export const Map: FC<Props> = ({ sensors, point }) => {
     return (
         <MapGl
             mapboxAccessToken={window.mapboxAccessToken}
@@ -26,6 +27,12 @@ export const Map: FC<Props> = ({ sensors }) => {
                     <MapSensor sensor={sensor} />
                 </Marker>
             ))}
+            {point && (
+                <Marker
+                    longitude={point.lng}
+                    latitude={point.lat}
+                />
+            )}
         </MapGl>
     )
 }

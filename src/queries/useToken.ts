@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
-import {authTokenGet} from "../api/auth/token/authTokenGet.ts";
+import {accountTokenGet} from "../api/account/token/accountTokenGet.ts";
 
 export const useToken = () => useQuery({
     queryKey: ['token'],
-    queryFn: () => authTokenGet().then(({ payload }) => payload)
+    queryFn: () => accountTokenGet().then(({ payload }) => payload)
 })

@@ -72,9 +72,12 @@ export interface RecoverCodePost {
   password: string;
 }
 
-export interface PasswordPut {
+export interface AccountPatch {
   old_password: string;
-  password: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface Session {
@@ -129,6 +132,15 @@ export type Sensor = SensorNotOwn | SensorOwn;
 export interface SensorPost {
   coordinates: Coordinates;
   address: Address;
+}
+
+export interface SensorPatch {
+  coordinates?: Coordinates;
+  address?: Address;
+}
+
+export interface SensorVisiblePut {
+  visible: boolean;
 }
 
 export interface SensorReading {
