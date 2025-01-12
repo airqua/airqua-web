@@ -2,6 +2,9 @@ import {FC} from "react";
 import {Form, FormInstance, FormProps, Input} from "antd";
 import {RecoverPost} from "../../../types/domain.ts";
 import {COMMON_FORM_PROPS} from "../constants.ts";
+import ReCAPTCHA from "react-google-recaptcha";
+import {RECAPTCHA_API_KEY} from "../../../constants/constants.ts";
+import {SignupFormType} from "./SignupForm.tsx";
 
 type Props = {
     form: FormInstance<RecoverPost>;
@@ -26,6 +29,12 @@ export const RecoveryForm: FC<Props> = ({ form, onFinish }) => {
                 }]}
             >
                 <Input placeholder="john@example.com" />
+            </Form.Item>
+            <Form.Item<SignupFormType>
+                name="recaptcha"
+                rules={[{ required: true }]}
+            >
+                <ReCAPTCHA sitekey={RECAPTCHA_API_KEY} />
             </Form.Item>
         </Form>
     )

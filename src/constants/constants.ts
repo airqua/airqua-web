@@ -12,3 +12,5 @@ export const MAP_INITIAL_VIEWSTATE = {
 };
 export const MAPBOX_LIGHT_THEME_STYLE = "mapbox://styles/mapbox/streets-v9";
 export const MAPBOX_DARK_THEME_STYLE = "mapbox://styles/mapbox/dark-v11";
+
+export const RECAPTCHA_API_KEY = "6Lehb7UqAAAAAEcLy7q86y7q3OQf8Q-1jh2PoSuf";

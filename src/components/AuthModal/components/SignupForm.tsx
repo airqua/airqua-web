@@ -1,7 +1,9 @@
 import {FC} from "react";
 import {Flex, Form, FormInstance, FormProps, Input} from "antd";
+import ReCAPTCHA from "react-google-recaptcha";
 import {SignupPost} from "../../../types/domain.ts";
 import {COMMON_FORM_PROPS} from "../constants.ts";
+import {RECAPTCHA_API_KEY} from "../../../constants/constants.ts";
 
 export type SignupFormType = SignupPost & {
     repeat_password: string;
@@ -89,6 +91,12 @@ export const SignupForm: FC<Props> = ({ form, onFinish }) => {
                 ]}
             >
                 <Input.Password />
+            </Form.Item>
+            <Form.Item<SignupFormType>
+                name="recaptcha"
+                rules={[{ required: true }]}
+            >
+                <ReCAPTCHA sitekey={RECAPTCHA_API_KEY} />
             </Form.Item>
         </Form>
     )
