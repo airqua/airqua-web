@@ -71,18 +71,20 @@ export const AccountInfo: FC = () => {
 
     const [accountDeleteLoading, setAccountDeleteLoading] = useState(false);
     const handleAccountDelete = async () => {
-        if(await modal.confirm({ title: 'Delete all sessions except current?' })) {
-            setAccountDeleteLoading(true);
-            try {
-                await accountDelete();
-                message.success('We are sorry that you have to go');
-                setProfile(null);
-                navigate('/');
-            } catch(e) {
-                console.error(e);
-                message.error('Unknown error encountered while deleting account');
-            } finally {
-                setAccountDeleteLoading(false);
+        if(await modal.confirm({ title: 'Delete account?' })) {
+            if(await modal.confirm({ title: 'Are you sure? There will be no way back!' })) {
+                setAccountDeleteLoading(true);
+                try {
+                    await accountDelete();
+                    message.success('We are sorry that you have to go');
+                    setProfile(null);
+                    navigate('/');
+                } catch(e) {
+                    console.error(e);
+                    message.error('Unknown error encountered while deleting account');
+                } finally {
+                    setAccountDeleteLoading(false);
+                }
             }
         }
     }
