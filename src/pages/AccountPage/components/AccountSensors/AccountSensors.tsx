@@ -10,9 +10,11 @@ import {MapModal} from "../MapModal/MapModal.tsx";
 import {CredentialsModal} from "../CredentialsModal/CredentialsModal.tsx";
 import {EditSensorModal} from "../EditSensorModal/EditSensorModal.tsx";
 import {CreateSensorModal} from "../CreateSensorModal/CreateSensorModal.tsx";
+import {useOwnProfile} from "../../../../stores/OwnProfileStore.ts";
 
 export const AccountSensors: FC = () => {
     const { message, modal } = App.useApp();
+    const { profile } = useOwnProfile();
 
     const { data: sensors, isLoading, refetch } = useSensorsOwn();
 
@@ -124,11 +126,21 @@ export const AccountSensors: FC = () => {
             title={(
                 <Flex align="center" justify="space-between">
                     <Typography.Title level={3} className={styles.noMargin}>Sensors</Typography.Title>
-                    <Button
-                        type="primary"
-                        icon={<PlusOutlined />}
-                        onClick={() => setCreateSensorOpen(true)}
-                    >Add sensor</Button>
+                    {profile?.verified ? (
+                        <Button
+                            type="primary"
+                            icon={<PlusOutlined />}
+                            onClick={() => setCreateSensorOpen(true)}
+                        >Add sensor</Button>
+                    ) : (
+                        <Tooltip title="Verify your account first">
+                            <Button
+                                type="primary"
+                                icon={<PlusOutlined />}
+                                disabled
+                            >Add sensor</Button>
+                        </Tooltip>
+                    )}
                 </Flex>
             )}
             className={styles.card}
