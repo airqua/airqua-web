@@ -8,9 +8,11 @@ import {MapSensor} from "../MapSensor/MapSensor.tsx";
 type Props = {
     sensors?: Sensor[];
     point?: Coordinates;
+    draggable?: boolean;
+    onDragEnd?: (coordinates: Coordinates) => void;
 }
 
-export const Map: FC<Props> = ({ sensors, point }) => {
+export const Map: FC<Props> = ({ sensors, point, draggable, onDragEnd }) => {
     return (
         <MapGl
             mapboxAccessToken={window.mapboxAccessToken}
@@ -31,6 +33,8 @@ export const Map: FC<Props> = ({ sensors, point }) => {
                 <Marker
                     longitude={point.lng}
                     latitude={point.lat}
+                    draggable={draggable}
+                    onDragEnd={(v) => onDragEnd?.(v.lngLat)}
                 />
             )}
         </MapGl>

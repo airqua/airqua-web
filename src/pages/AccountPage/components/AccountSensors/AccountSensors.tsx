@@ -9,11 +9,14 @@ import {sensorsSensorIdDelete} from "../../../../api/sensors/sensorsSensorIdDele
 import {MapModal} from "../MapModal/MapModal.tsx";
 import {CredentialsModal} from "../CredentialsModal/CredentialsModal.tsx";
 import {EditSensorModal} from "../EditSensorModal/EditSensorModal.tsx";
+import {CreateSensorModal} from "../CreateSensorModal/CreateSensorModal.tsx";
 
 export const AccountSensors: FC = () => {
     const { message, modal } = App.useApp();
 
     const { data: sensors, isLoading, refetch } = useSensorsOwn();
+
+    const [createSensorOpen, setCreateSensorOpen] = useState(false);
 
     const [mapCoordinates, setMapCoordinates] = useState<Coordinates | null>(null);
     const [credentialsSensorId, setCredentialsSensorId] = useState<string | null>(null);
@@ -121,7 +124,11 @@ export const AccountSensors: FC = () => {
             title={(
                 <Flex align="center" justify="space-between">
                     <Typography.Title level={3} className={styles.noMargin}>Sensors</Typography.Title>
-                    <Button type="primary" icon={<PlusOutlined />}>Add sensor</Button>
+                    <Button
+                        type="primary"
+                        icon={<PlusOutlined />}
+                        onClick={() => setCreateSensorOpen(true)}
+                    >Add sensor</Button>
                 </Flex>
             )}
             className={styles.card}
@@ -129,7 +136,7 @@ export const AccountSensors: FC = () => {
         >
             <Table
                 columns={columns}
-                dataSource={sensors}
+                dataSource={sensors?.map((sensor) => ({ ...sensor, key: sensor.id }))}
                 loading={isLoading}
             />
             <MapModal
@@ -144,6 +151,11 @@ export const AccountSensors: FC = () => {
                 sensor={editSensorModal}
                 onClose={() => setEditSensorModal(null)}
                 onUpdate={refetch}
+            />
+            <CreateSensorModal
+                open={createSensorOpen}
+                onClose={() => setCreateSensorOpen(false)}
+                onCreate={refetch}
             />
         </Card>
     )
