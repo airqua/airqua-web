@@ -34,6 +34,7 @@ export const RecoveryForm: FC<Props> = ({ form, onFinish }) => {
                 name="recaptcha"
                 label=" "
                 rules={[{ required: true }]}
+                colon={false}
                 extra={(
                     <>
                         This site is protected by reCAPTCHA.
