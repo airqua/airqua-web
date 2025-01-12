@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
                 element: <Navigate to="/" state={{ modal: 'recovery' }} />
             },
             path('/recover/:code', RecoveryPage),
-            path('/verify/:id', VerifyPage)
+            path('/verify/:code', VerifyPage)
         ]
     }
 ]);
