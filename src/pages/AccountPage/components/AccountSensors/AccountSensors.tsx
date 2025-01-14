@@ -1,7 +1,14 @@
 import {FC, useState} from "react";
-import {App, Badge, Button, Card, Flex, Switch, Table, TableProps, Tooltip, Typography} from "antd";
+import {App, Badge, Button, Card, Flex, Switch, Table, TableProps, theme, Tooltip, Typography} from "antd";
 import styles from './AccountSensors.module.css';
-import {DeleteOutlined, EditOutlined, GlobalOutlined, KeyOutlined, PlusOutlined} from "@ant-design/icons";
+import {
+    DeleteOutlined,
+    EditOutlined,
+    ExclamationCircleFilled,
+    GlobalOutlined,
+    KeyOutlined,
+    PlusOutlined
+} from "@ant-design/icons";
 import {Coordinates, SensorOwn} from "../../../../types/domain.ts";
 import {useSensorsOwn} from "../../../../queries/useSensorsOwn.ts";
 import {sensorsSensorIdVisiblePut} from "../../../../api/sensors/sensorsSensorIdVisiblePut.ts";
@@ -14,6 +21,7 @@ import {useOwnProfile} from "../../../../stores/OwnProfileStore.ts";
 
 export const AccountSensors: FC = () => {
     const { message, modal } = App.useApp();
+    const { token } = theme.useToken();
     const { profile } = useOwnProfile();
 
     const { data: sensors, isLoading, refetch } = useSensorsOwn();
@@ -91,11 +99,18 @@ export const AccountSensors: FC = () => {
             key: 'visible',
             dataIndex: 'visible',
             title: 'Visibility',
-            render: (visible: SensorOwn['visible'], { id }) => (
-                <Switch
-                    value={visible}
-                    onChange={(v) => handleVisibilityToggle(id, v)}
-                />
+            render: (visible: SensorOwn['visible'], { id, approved }) => (
+               <Flex align="center" gap={8}>
+                   <Switch
+                       value={visible}
+                       onChange={(v) => handleVisibilityToggle(id, v)}
+                   />
+                   {!approved && (
+                       <Tooltip title="This sensor has not yet been approved. This setting will start working soon after that.">
+                           <ExclamationCircleFilled style={{ color: token.colorWarning, fontSize: '18px' }}/>
+                       </Tooltip>
+                   )}
+               </Flex>
             )
         },
         {
