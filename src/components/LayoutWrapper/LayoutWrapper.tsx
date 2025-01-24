@@ -2,8 +2,8 @@ import {FC, useEffect, useMemo, useState} from "react";
 import {App, Button, Flex, Layout, Menu, MenuProps} from "antd";
 import {Link, Outlet, useLocation} from "react-router-dom";
 import styles from './LayoutWrapper.module.css';
-import {API_DOCS_URL} from "../../constants/constants.ts";
-import {ExportOutlined, LoginOutlined, LogoutOutlined, UserOutlined} from "@ant-design/icons";
+import {API_DOCS_URL, GITHUB_ORG_URL} from "../../constants/constants.ts";
+import {ExportOutlined, GithubOutlined, LoginOutlined, LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {AuthModal, AuthModalMode} from "../AuthModal/AuthModal.tsx";
 import {useOwnProfile} from "../../stores/OwnProfileStore.ts";
 import {authDelete} from "../../api/auth/authDelete.ts";
@@ -33,12 +33,23 @@ const ITEMS: MenuProps['items'] = [
         label: (
             <Link to="/about">About</Link>
         )
+    },
+    {
+        key: 'github',
+        label: (
+            <a href={GITHUB_ORG_URL} target="_blank">
+                <Flex justify="center" align="center" gap={6}>
+                    <GithubOutlined />
+                    GitHub
+                </Flex>
+            </a>
+        )
     }
 ]
 
 export const LayoutWrapper: FC = () => {
-    const { state } = useLocation();
-    const { message } = App.useApp();
+    const {state} = useLocation();
+    const {message} = App.useApp();
 
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [authModalMode, setAuthModalMode] = useState<AuthModalMode>('login');

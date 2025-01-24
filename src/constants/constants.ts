@@ -4,6 +4,7 @@ export const API_BASE_URL = `${BASE_URL}api`;
 export const AUTH_REDIRECT_URL = '/login';
 
 export const API_DOCS_URL = "https://api.airqua.uk";
+export const GITHUB_ORG_URL = 'https://github.com/airqua'
 
 export const MAP_INITIAL_VIEWSTATE = {
     latitude: 51.454514,
