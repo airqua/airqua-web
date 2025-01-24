@@ -48,7 +48,7 @@ const ITEMS: MenuProps['items'] = [
 ]
 
 export const LayoutWrapper: FC = () => {
-    const {state} = useLocation();
+    const { state, pathname } = useLocation();
     const {message} = App.useApp();
 
     const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -98,6 +98,7 @@ export const LayoutWrapper: FC = () => {
                         mode="horizontal"
                         disabledOverflow
                         items={ITEMS}
+                        selectedKeys={[pathname]}
                     />
                     {profile ? (
                         <Flex align="center" gap={8}>
