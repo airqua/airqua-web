@@ -63,14 +63,14 @@ export const CreateSensorModal: FC<Props> = ({ open, onClose, onCreate }) => {
                                 <Form.Item<SensorPost>
                                     name={['address', 'street']}
                                     noStyle
-                                    rules={[{ type: 'number', required: true }]}
+                                    rules={[{ type: 'string', required: true, whitespace: true }]}
                                 >
                                     <Input placeholder="Address" />
                                 </Form.Item>
                                 <Form.Item<SensorPost>
                                     name={['address', 'city']}
                                     noStyle
-                                    rules={[{ type: 'number', required: true }]}
+                                    rules={[{ type: 'string', required: true, whitespace: true }]}
                                 >
                                     <Input placeholder="City" />
                                 </Form.Item>
