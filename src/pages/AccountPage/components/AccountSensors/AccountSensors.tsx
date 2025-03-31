@@ -106,7 +106,7 @@ export const AccountSensors: FC = () => {
                        onChange={(v) => handleVisibilityToggle(id, v)}
                    />
                    {!approved && (
-                       <Tooltip title="This sensor has not yet been approved. This setting will start working soon after that.">
+                       <Tooltip title="This sensor has not yet been approved. This setting will start working soon after that happens!">
                            <ExclamationCircleFilled style={{ color: token.colorWarning, fontSize: '18px' }}/>
                        </Tooltip>
                    )}
