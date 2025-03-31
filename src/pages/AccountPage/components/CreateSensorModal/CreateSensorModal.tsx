@@ -18,7 +18,7 @@ export const CreateSensorModal: FC<Props> = ({ open, onClose, onCreate }) => {
     const [form] = Form.useForm<SensorPost>();
     const [loading, setLoading] = useState(false);
     const [type, setType] = useState<SensorType>('wiot');
-    const [state, setState] = useState<'form' | 'success' | 'error'>('success');
+    const [state, setState] = useState<'form' | 'success' | 'error'>('form');
 
     const [mapCoordinates, setMapCoordinates] = useState<Coordinates | null>(null);
 
