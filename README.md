@@ -1,7 +1,7 @@
 # AirQua frontend
 ## About
 Repository with frontend interface for AirQua service. 
-Includes the main page, pages with guides and a personal cabinet
+Includes main page, pages with guides and account management.
 
 ## Local development
 1. Clone project
