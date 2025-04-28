@@ -8,6 +8,7 @@ import {Coordinates, Sensor, SensorOwn} from "../../types/domain.ts";
 import {CheckOutlined, GlobalOutlined} from "@ant-design/icons";
 import {MapModal} from "../AccountPage/components/MapModal/MapModal.tsx";
 import {sensorsSensorIdApprovePut} from "../../api/sensors/sensorsSensorIdApprovePut.ts";
+import styles from './AdminPage.module.css';
 
 export const AdminPage = withAuth(() => {
     const { profile } = useOwnProfile();
@@ -79,7 +80,7 @@ export const AdminPage = withAuth(() => {
     }
 
     return (
-        <>
+        <div className={styles.container}>
             <Table
                 columns={columns}
                 dataSource={data}
@@ -90,6 +91,6 @@ export const AdminPage = withAuth(() => {
                 point={mapCoordinates}
                 onClose={() => setMapCoordinates(null)}
             />
-        </>
+        </div>
     );
 }, true);
