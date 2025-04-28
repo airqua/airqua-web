@@ -7,6 +7,7 @@ import {HowToPage} from "./pages/HowToPage/HowToPage.tsx";
 import {AboutPage} from "./pages/AboutPage/AboutPage.tsx";
 import {RecoveryPage} from "./pages/RecoveryPage/RecoveryPage.tsx";
 import {VerifyPage} from "./pages/VerifyPage/VerifyPage.tsx";
+import {AdminPage} from "./pages/AdminPage/AdminPage.tsx";
 
 const path = (path: string, Page: PageType): RouteObject => ({
     path,
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
             path('/howto', HowToPage),
             path('/about', AboutPage),
             path('/account', AccountPage),
+            path('/admin', AdminPage),
             {
                 path: '/login',
                 element: <Navigate to="/" state={{ modal: 'login' }} />

@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {useState} from "react";
 import {useOwnProfile} from "../../stores/OwnProfileStore.ts";
 import {Navigate} from "react-router-dom";
 import {withAuth} from "../../hocs/withAuth.ts";
@@ -9,7 +9,7 @@ import {CheckOutlined, GlobalOutlined} from "@ant-design/icons";
 import {MapModal} from "../AccountPage/components/MapModal/MapModal.tsx";
 import {sensorsSensorIdApprovePut} from "../../api/sensors/sensorsSensorIdApprovePut.ts";
 
-export const AdminPage: FC = withAuth(() => {
+export const AdminPage = withAuth(() => {
     const { profile } = useOwnProfile();
     const { message } = App.useApp();
 
