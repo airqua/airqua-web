@@ -83,6 +83,16 @@ export const LayoutWrapper: FC = () => {
         }
     }), [profile]);
 
+    const items = [
+        ...ITEMS,
+        ...(profile?.admin ? [{
+            key: '/admin',
+            label: (
+                <Link to="/admin">Admin</Link>
+            )
+        }] : [])
+    ]
+
     return (
         <Layout className={styles.layout}>
             <Layout.Header className={styles.header}>
@@ -97,7 +107,7 @@ export const LayoutWrapper: FC = () => {
                         theme="dark"
                         mode="horizontal"
                         disabledOverflow
-                        items={ITEMS}
+                        items={items}
                         selectedKeys={[pathname]}
                     />
                     {profile ? (
