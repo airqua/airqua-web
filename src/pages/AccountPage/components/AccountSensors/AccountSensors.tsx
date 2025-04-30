@@ -61,6 +61,7 @@ export const AccountSensors: FC = () => {
             key: 'address',
             dataIndex: 'address',
             title: 'Address',
+            minWidth: 150,
             render: (address: SensorOwn['address'], { active }) => (
                 <Flex align="center" gap={16}>
                     <Tooltip title={active ? 'Active' : 'Inactive'}>
@@ -166,6 +167,7 @@ export const AccountSensors: FC = () => {
                 dataSource={sensors?.map((sensor) => ({ ...sensor, key: sensor.id }))}
                 loading={isLoading}
                 pagination={{ pageSize: 9 }}
+                scroll={{ x: true }}
             />
             <MapModal
                 point={mapCoordinates}

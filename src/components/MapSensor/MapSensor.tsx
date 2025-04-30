@@ -4,6 +4,7 @@ import {Sensor} from "../../types/domain.ts";
 import styles from './MapSensor.module.css';
 import {Flex, Popover, Typography} from "antd";
 import {SensorDataContent} from "../SensorDataContent/SensorDataContent.tsx";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
 
 const getSensorStatus = (sensor: Sensor) => {
     if(!sensor.active || !sensor.last_reading) return 'inactive';
@@ -15,6 +16,8 @@ type Props = {
 }
 
 export const MapSensor: FC<Props> = ({ sensor }) => {
+    const isMobile = useIsMobile();
+
     const [clicked, setClicked] = useState(false);
     const [hovered, setHovered] = useState(false);
 
@@ -43,6 +46,21 @@ export const MapSensor: FC<Props> = ({ sensor }) => {
         </Flex>
     )
 
+    const innerPopover = (
+        <Popover
+            content={<SensorDataContent sensor={sensor} onClose={handleClose} />}
+            trigger="click"
+            open={clicked}
+            onOpenChange={handleClickChange}
+        >
+            <div className={cx(styles.sensor, styles[`${getSensorStatus(sensor)}Readings`])}/>
+        </Popover>
+    );
+
+    if(isMobile) {
+        return innerPopover;
+    }
+
     return (
         <Popover
             title={sensor.address.street}
@@ -51,14 +69,7 @@ export const MapSensor: FC<Props> = ({ sensor }) => {
             open={hovered}
             onOpenChange={handleHoverChange}
         >
-            <Popover
-                content={<SensorDataContent sensor={sensor} onClose={handleClose} />}
-                trigger="click"
-                open={clicked}
-                onOpenChange={handleClickChange}
-            >
-                <div className={cx(styles.sensor, styles[`${getSensorStatus(sensor)}Readings`])}/>
-            </Popover>
+            {innerPopover}
         </Popover>
     )
 }
