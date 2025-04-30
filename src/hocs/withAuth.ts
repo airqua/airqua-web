@@ -21,6 +21,10 @@ export const checkAuth = async (required?: boolean) => {
     }
 };
 
+export const flushAuth = () => {
+    useOwnProfile.setState({ profile: null });
+}
+
 export const withAuth = (Component: FC, required?: boolean): PageType => {
     const PageComponent = (Component as PageType);
     PageComponent.loader = () => checkAuth(required);
