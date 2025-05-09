@@ -16,8 +16,8 @@ export const MAPBOX_DARK_THEME_STYLE = "mapbox://styles/mapbox/dark-v11";
 
 export const RECAPTCHA_API_KEY = "6Lehb7UqAAAAAEcLy7q86y7q3OQf8Q-1jh2PoSuf";
 
-export const FLASHER_DOWNLOAD_WIN = "https://github.com/airqua/airqua-terminal-flasher/releases/download/v1.0.0/airqua-terminal-flasher-1.0.0-setup.exe";
-export const FLASHER_DOWNLOAD_MAC = "https://github.com/airqua/airqua-terminal-flasher/releases/download/v1.0.0/airqua-terminal-flasher-1.0.0.dmg";
+export const FLASHER_DOWNLOAD_WIN = "https://github.com/airqua/airqua-terminal-flasher/releases/download/v1.0.1/airqua-terminal-flasher-1.0.1-setup.exe";
+export const FLASHER_DOWNLOAD_MAC = "https://github.com/airqua/airqua-terminal-flasher/releases/download/v1.0.1/airqua-terminal-flasher-1.0.1.dmg";
 
 export const SENSOR_TYPES_SEGMENTS = [
     { label: 'Wio Terminal', value: 'wiot' } as const,
